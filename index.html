@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="DART-VLA: Depth-Augmented and Reinforcement-Tuned Vision-Language-Action Policies. Watch the real-world insulator grasping and placement demonstration. Source code coming soon.">
+  <meta name="theme-color" content="#142c3a">
+  <title>DART-VLA | Depth-Augmented and Reinforcement-Tuned VLA</title>
+  <style>
+    :root{--ink:#142c3a;--muted:#586b74;--accent:#086f73;--paper:#f6f8f8;--line:#dce5e7}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}
+    body{margin:0;color:var(--ink);background:white;font-family:Inter,Arial,Helvetica,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased}
+    a{color:var(--accent);text-underline-offset:4px}a:focus-visible,video:focus-visible{outline:3px solid #d98c27;outline-offset:5px}
+    .skip{position:fixed;top:-80px;left:20px;z-index:9;background:white;padding:10px}.skip:focus{top:10px}
+    .wrap{width:min(1100px,calc(100% - 48px));margin:auto}
+    header{border-bottom:1px solid var(--line);background:#fff}
+    nav{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:76px}
+    .brand{text-decoration:none;font-size:21px;letter-spacing:-.7px;font-weight:800;color:var(--ink)}
+    .brand span{color:var(--accent)}.navlinks{display:flex;gap:28px;font-size:14px}.navlinks a{color:var(--muted);text-decoration:none}.navlinks a:hover{color:var(--accent)}
+    .hero{text-align:center;padding:78px 0 52px;background:radial-gradient(ellipse at 50% 0%,#e9f4f2 0,white 68%)}
+    .eyebrow{font-size:11px;letter-spacing:2.3px;font-weight:700;text-transform:uppercase;color:var(--accent);margin:0 0 18px}
+    h1{font-size:clamp(52px,8vw,84px);line-height:1.05;letter-spacing:-4px;margin:0 0 22px;font-weight:800}
+    .subtitle{font-size:clamp(23px,3.3vw,35px);line-height:1.3;letter-spacing:-.8px;max-width:890px;margin:0 auto 25px;font-weight:550}
+    .authors{font-size:15px;margin:0 auto 8px}.authors span{white-space:nowrap}.affiliations{font-size:12px;color:var(--muted);max-width:850px;margin:0 auto;line-height:1.9}
+    sup{font-size:.65em;margin-left:2px}.actions{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:30px}
+    .button{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:1px solid var(--line);padding:11px 21px;border-radius:7px;font-size:14px;font-weight:600;text-decoration:none;color:var(--ink);background:white}
+    .button.primary{background:var(--ink);border-color:var(--ink);color:white}.button:hover{box-shadow:0 3px 14px #142c3a15}.status{display:inline-flex;align-items:center;gap:7px;color:var(--muted);font-size:12px;margin-top:20px}.dot{width:7px;height:7px;border-radius:50%;background:#ad701c}
+    .demo{padding:20px 0 66px}.section-top{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:20px}
+    h2{font-size:28px;letter-spacing:-.8px;line-height:1.3;margin:0}.section-top p{font-size:13px;color:var(--muted);margin:0}
+    .video-shell{background:#101b22;border-radius:12px;overflow:hidden;border:1px solid #263740;box-shadow:0 16px 40px #142c3a12}
+    video{display:block;width:100%;max-height:640px;min-height:220px;background:#101b22;object-fit:contain}
+    .video-meta{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 20px;background:#14232d;color:#dce7eb;font-size:13px}.video-meta a{color:#b3e6dc;white-space:nowrap}
+    .caption{font-size:13px;color:var(--muted);max-width:870px;margin:18px 0 0}
+    .overview{background:var(--paper);padding:64px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+    .overview-grid{display:grid;grid-template-columns:1fr 2fr;gap:70px}.overview p{margin:0 0 18px;font-size:16px;color:#405661}.overview p:last-child{margin-bottom:0}
+    .method{padding:64px 0}.method-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:32px}.method-item{border-top:2px solid var(--accent);padding-top:20px}.step{font-size:11px;letter-spacing:1.5px;color:var(--accent);font-weight:700}.method h3{font-size:18px;margin:12px 0 9px;letter-spacing:-.2px}.method p{font-size:14px;color:var(--muted);margin:0}
+    .resources{padding:0 0 64px}.release{display:flex;align-items:center;justify-content:space-between;gap:35px;border:1px solid var(--line);border-radius:10px;padding:32px 36px;background:#f6faf9}.release p{font-size:14px;color:var(--muted);margin:12px 0 0;max-width:650px}.badge{display:inline-block;font-size:13px;font-weight:650;color:#895a12;background:#fcf1dd;border:1px solid #ecd5a9;padding:7px 13px;border-radius:30px;white-space:nowrap}
+    footer{border-top:1px solid var(--line);padding:26px 0;font-size:12px;color:var(--muted)}footer .wrap{display:flex;justify-content:space-between;gap:20px}footer a{color:var(--muted)}
+    @media(max-width:720px){.wrap{width:calc(100% - 32px)}nav{min-height:66px;gap:14px}.navlinks{gap:16px;font-size:12px}.hero{padding-top:48px}h1{letter-spacing:-2px}.authors{line-height:1.9}.affiliations{font-size:11px}.section-top{display:block}.section-top p{margin-top:8px}.overview-grid{grid-template-columns:1fr;gap:24px}.method-grid{grid-template-columns:1fr;gap:26px}.release{display:block;padding:25px}.badge{margin-top:22px}.video-meta{padding:13px;align-items:start;font-size:11px}.overview,.method{padding:44px 0}.demo{padding-bottom:44px}footer .wrap{flex-wrap:wrap}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header><nav class="wrap" aria-label="Main navigation"><a class="brand" href="#main">DART<span>-VLA</span></a><div class="navlinks"><a href="#demonstration">Demonstration</a><a href="#overview">Overview</a><a href="#code">Code</a></div></nav></header>
+  <main id="main">
+    <section class="hero" aria-labelledby="project-title"><div class="wrap">
+      <p class="eyebrow">Vision · Geometry · Action</p>
+      <h1 id="project-title">DART-VLA</h1>
+      <p class="subtitle">Depth-Augmented and Reinforcement-Tuned<br>Vision-Language-Action Policies</p>
+      <p class="authors"><span>Yifei Hu<sup>1,2</sup></span> &nbsp; <span>Shuai Li<sup>3</sup></span> &nbsp; <span>Rui Zou<sup>3</sup></span> &nbsp; <span>Shengyu Zhao<sup>4,*</sup></span> &nbsp; <span>Jie Liu<sup>4,*</sup></span></p>
+      <p class="affiliations"><sup>1</sup> Tianjin University &nbsp; <sup>2</sup> State Grid Tianjin Electric Power Company<br><sup>3</sup> State Grid Ruijia (Tianjin) Intelligent Robot Co., Ltd.<br><sup>4</sup> School of Artificial Intelligence and Robotics, Hunan University<br>* Corresponding authors</p>
+      <div class="actions"><a class="button primary" href="#demonstration"><span aria-hidden="true">▶</span> Watch demonstration</a><a class="button" href="https://github.com/10000hPlan/DART-VLA">GitHub repository <span aria-hidden="true">↗</span></a><a class="button" href="#code">Code · Coming soon</a></div>
+      <p class="status"><span class="dot" aria-hidden="true"></span> Demonstration available · Source code coming soon</p>
+    </div></section>
+    <section class="demo wrap" id="demonstration" aria-labelledby="demo-title">
+      <div class="section-top"><div><p class="eyebrow">Real-world demonstration</p><h2 id="demo-title">Insulator Grasping and Placement</h2></div><p>Physical robot · Video shown at 5× speed</p></div>
+      <div class="video-shell"><video controls playsinline preload="metadata" aria-label="Real-world insulator grasping and placement demonstration, shown at five times real-time speed"><source src="insulator-grasp.mp4" type="video/mp4">Your browser does not support embedded video. <a href="insulator-grasp.mp4">Download the demonstration.</a></video><div class="video-meta"><span>DART-VLA / Insulator grasping and placement · 5× speed</span><a href="insulator-grasp.mp4" download>Download MP4 ↓</a></div></div>
+      <p class="caption">Real-world insulator grasping and placement in a laboratory tabletop setup. This video is accelerated to 5× real-time speed. The physical-robot study evaluates supervised depth augmentation using task-specific demonstrations; reinforcement tuning is evaluated in simulation.</p>
+    </section>
+    <section class="overview" id="overview" aria-labelledby="overview-title"><div class="wrap overview-grid"><div><p class="eyebrow">Research overview</p><h2 id="overview-title">Geometric cues for<br>robot manipulation.</h2></div><div><p>DART-VLA is a depth-augmented and reinforcement-tuned framework for flow-based vision-language-action policies. It combines monocular geometric priors with reward-guided optimization to improve robot manipulation.</p><p>Identity-start depth modulation adds spatial structure while preserving the pretrained token distribution. In simulation, stochastic flow rollouts enable reinforcement tuning, while evaluation retains deterministic action generation. Experiments cover LIBERO, MetaWorld, and supervised real-world UR5 insulator manipulation.</p></div></div></section>
+    <section class="method wrap" aria-labelledby="method-title"><p class="eyebrow">Method</p><h2 id="method-title">From depth to action</h2><div class="method-grid"><article class="method-item"><span class="step">01 / PERCEPTION</span><h3>Monocular depth priors</h3><p>Depth features supplement RGB observations with spatial-geometric cues for manipulation.</p></article><article class="method-item"><span class="step">02 / INTEGRATION</span><h3>Identity-start DepthFiLM</h3><p>Feature-wise modulation introduces depth conditioning while preserving the initial behavior of the pretrained backbone.</p></article><article class="method-item"><span class="step">03 / OPTIMIZATION</span><h3>FlowPO reinforcement tuning</h3><p>Reward-guided stochastic flow rollouts refine policies in simulation, with deterministic Euler action generation at evaluation.</p></article></div></section>
+    <section class="resources wrap" id="code" aria-labelledby="code-title"><div class="release"><div><p class="eyebrow">Open-source release</p><h2 id="code-title">Source code</h2><p>The DART-VLA implementation is coming soon. The public repository currently hosts this project website and the real-world demonstration video.</p></div><span class="badge">Coming soon</span></div></section>
+  </main>
+  <footer><div class="wrap"><span>DART-VLA · Research project</span><a href="https://github.com/10000hPlan/DART-VLA">Project repository ↗</a></div></footer>
+</body>
+</html>
